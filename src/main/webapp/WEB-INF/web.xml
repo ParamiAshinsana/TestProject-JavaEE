@@ -14,31 +14,31 @@
 <!--    </servlet>-->
 
 
-    <servlet>
-        <servlet-name>ExampleDemo</servlet-name>
-        <servlet-class>com.example.exampledemo.api.Student</servlet-class>
-        <init-param>
-            <param-name>db-user</param-name>
-            <param-value>root</param-value>
-        </init-param>
-        <init-param>
-            <param-name>db-pw</param-name>
-            <param-value>1234</param-value>
-        </init-param>
-        <init-param>
-            <param-name>db-url</param-name>
-            <param-value>jdbc:mysql://localhost:3306/system24?createDatabaseIfNotExist=true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>db-class</param-name>
-            <param-value>com.mysql.cj.jdbc.Driver</param-value>
-        </init-param>
-        <load-on-startup>5</load-on-startup>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>ExampleDemo</servlet-name>-->
+<!--        <servlet-class>com.example.exampledemo.api.Student</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>db-user</param-name>-->
+<!--            <param-value>root</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>db-pw</param-name>-->
+<!--            <param-value>1234</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>db-url</param-name>-->
+<!--            <param-value>jdbc:mysql://localhost:3306/system24?createDatabaseIfNotExist=true</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>db-class</param-name>-->
+<!--            <param-value>com.mysql.cj.jdbc.Driver</param-value>-->
+<!--        </init-param>-->
+<!--        <load-on-startup>5</load-on-startup>-->
+<!--    </servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>ExampleDemo</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>ExampleDemo</servlet-name>-->
+<!--        <url-pattern>/test</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>
