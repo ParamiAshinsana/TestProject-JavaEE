@@ -140,4 +140,28 @@ public class Student extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        var id = req.getParameter("id");
+
+        resp.setContentType("text/html");
+        var writer = resp.getWriter();
+
+        try {
+            String DELETE_DATA = "DELETE FROM STUDENT WHERE stid = ?";
+            var ps = connection.prepareStatement(DELETE_DATA);
+            ps.setString(1, id);
+
+            if (ps.executeUpdate() != 0) {
+                writer.println("Data Deleted!");
+                System.out.println("Deleted");
+            } else {
+                writer.println("Failed to delete data!");
+                System.out.println("Not Deleted");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
