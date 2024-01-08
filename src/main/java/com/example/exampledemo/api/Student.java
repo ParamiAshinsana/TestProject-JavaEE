@@ -22,6 +22,7 @@ import java.sql.SQLException;
         },
         loadOnStartup = 5)
 public class Student extends HttpServlet {
+    private static final String SAVE_STUDENT_DATA = "INSERT INTO STUDENT (stid, stname, staddress) VALUES (?,?,?)";
 
     Connection connection;
 
@@ -46,8 +47,37 @@ public class Student extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Hello doGet");
         System.out.println("Parami Ashinsana");
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Hello doPost");
 
+        var id = req.getParameter("id");// key ekk danne
+        var name = req.getParameter("name");// key ekk danne
+        var address = req.getParameter("address");
+        var writer = resp.getWriter();
+
+        resp.setContentType("text/html");
+
+        try {
+            var ps = connection.prepareStatement(SAVE_STUDENT_DATA);
+
+            ps.setString(1, id);
+            ps.setString(2, name);
+            ps.setString(3, address);
+
+            if (ps.executeUpdate() != 0) {
+                writer.println("Data Saved!");
+                System.out.println("Saved");
+            } else {
+                writer.println("Failed to save data!");
+                System.out.println("Not Saved");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
