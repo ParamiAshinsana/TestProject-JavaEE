@@ -109,4 +109,35 @@ public class Student extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        var id = req.getParameter("id");
+
+        resp.setContentType("text/html");
+        var writer = resp.getWriter();
+
+        try {
+            var name = req.getParameter("name");
+            var address = req.getParameter("address");
+
+            String UPDATE_DATA = "UPDATE STUDENT SET stname = ?, staddress = ? WHERE stid = ?";
+            var ps = connection.prepareStatement(UPDATE_DATA);
+
+            ps.setString(1, id);
+            ps.setString(2, name);
+            ps.setString(3, address);
+
+
+            if (ps.executeUpdate() != 0) {
+                writer.println("Data Updated!");
+                System.out.println("Updated");
+            } else {
+                writer.println("Failed to update data!");
+                System.out.println("Not Updated");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
