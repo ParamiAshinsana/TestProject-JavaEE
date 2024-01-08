@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -48,15 +49,43 @@ public class Student extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Hello doGet");
-        System.out.println("Parami Ashinsana");
+
+        PrintWriter writer = resp.getWriter();
+        resp.setContentType("text/html");
+
+        try {
+            var id = req.getParameter("id");
+
+            String SELECT_DATA = "SELECT * FROM STUDENT WHERE stid = ?";
+            var ps = connection.prepareStatement(SELECT_DATA);
+            ps.setString(1, id);
+
+            var resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String stId = resultSet.getString("stid");
+                String stName = resultSet.getString("stname");
+                String stAddress = resultSet.getString("staddress");
+
+                System.out.println("Student ID : " + stId);
+                System.out.println("Student Name : " + stName);
+                System.out.println("Student Address : " + stAddress);
+
+                writer.println("Student ID : " + stId);
+                writer.println("Student Name : " + stName);
+                writer.println("Student Address : " + stAddress);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Hello doPost");
 
-        var id = req.getParameter("id");// key ekk danne
-        var name = req.getParameter("name");// key ekk danne
+        var id = req.getParameter("id");
+        var name = req.getParameter("name");
         var address = req.getParameter("address");
         var writer = resp.getWriter();
 
